@@ -42,7 +42,18 @@ const MainLayout = () => {
           console.log(collapsed, type);
         }}
       >
-        <div className="demo-logo-vertical" />
+        <div
+          className=""
+          style={{
+            color: "white",
+            height: "4rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <h2>Islamic University</h2>
+        </div>
         <Menu
           theme="dark"
           mode="inline"
