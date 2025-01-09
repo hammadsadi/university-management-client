@@ -5,17 +5,14 @@ import CreateFacujlty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
 import { NavLink } from "react-router-dom";
 
-type TAdminRoutes = {
-  path: string;
-  element: ReactNode;
-};
+
 
 type TAdminSidebar = {
   key: string;
   label: ReactNode;
   children?: TAdminSidebar[];
 };
-const adminPaths = [
+export const adminPaths = [
   {
     name: "Dashboard",
     path: "dashboard",
@@ -68,24 +65,24 @@ export const adminSidebarGenerate = adminPaths.reduce(
 );
 
 // Programitical Way
-export const adminRoutes = adminPaths.reduce((acc: TAdminRoutes[], item) => {
-  if (item.path && item.element) {
-    acc.push({
-      path: item.path,
-      element: item.element,
-    });
-  }
+// export const adminRoutes = adminPaths.reduce((acc: TAdminRoutes[], item) => {
+//   if (item.path && item.element) {
+//     acc.push({
+//       path: item.path,
+//       element: item.element,
+//     });
+//   }
 
-  if (item.children) {
-    item.children.forEach((child) => {
-      acc.push({
-        path: child.path,
-        element: child.element,
-      });
-    });
-  }
-  return acc;
-}, []);
+//   if (item.children) {
+//     item.children.forEach((child) => {
+//       acc.push({
+//         path: child.path,
+//         element: child.element,
+//       });
+//     });
+//   }
+//   return acc;
+// }, []);
 
 // Hard Coded Way
 // export const adminPaths = [
