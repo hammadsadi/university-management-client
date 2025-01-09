@@ -26,6 +26,28 @@ const adminPaths2 = [
   },
 ];
 
+const sidebarGenerate = adminPaths2.reduce((acc, item) => {
+  if (item.path && item.name) {
+    acc.push({
+      key: item.name,
+      label: "NavLink",
+    });
+  }
+
+  if (item.children) {
+    acc.push({
+      key: item.name,
+      label: item.name,
+      children: item.children.map((child) => ({
+        key: child.name,
+        label: "NavLink",
+      })),
+    });
+  }
+  return acc;
+}, []);
+
+console.log(sidebarGenerate);
 const newAdminPaths = adminPaths2.reduce((acc, item) => {
   if (item.path && item.element) {
     acc.push({
@@ -44,5 +66,3 @@ const newAdminPaths = adminPaths2.reduce((acc, item) => {
   }
   return acc;
 }, []);
-
-console.log(newAdminPaths);
