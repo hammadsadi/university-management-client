@@ -4,6 +4,7 @@ export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://islamic-university-api.vercel.app/api/v1",
+    credentials: "include",
   }),
   endpoints: () => ({}),
 });
