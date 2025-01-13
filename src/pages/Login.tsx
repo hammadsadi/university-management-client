@@ -5,6 +5,7 @@ import { useAppDispatch } from "../redux/hooks";
 import { setUser } from "../redux/features/auth/authSlice";
 import { tokenDecode } from "../utils/tokenDecode";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,14 +18,20 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const [login, { error }] = useLoginMutation();
   const onsubmit = async (data) => {
-    const userInfo = {
-      id: data.userId,
-      password: data.password,
-    };
-    const res = await login(userInfo).unwrap();
-    const user = tokenDecode(res.data.accessToken);
-    dispatch(setUser({ user: user, token: res.data.accessToken }));
-    navigate(`/${user.role}/dashboard`);
+    const toastId = toast.loading("Loging In");
+    try {
+      const userInfo = {
+        id: data.userId,
+        password: data.password,
+      };
+      const res = await login(userInfo).unwrap();
+      const user = tokenDecode(res.data.accessToken);
+      dispatch(setUser({ user: user, token: res.data.accessToken }));
+      toast.success("Loging Success", { id: toastId });
+      navigate(`/${user.role}/dashboard`);
+    } catch (error) {
+      toast.error("Loging Faield", { id: toastId });
+    }
   };
   return (
     <div>
