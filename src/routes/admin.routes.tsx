@@ -4,8 +4,7 @@ import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFacujlty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
 import { NavLink } from "react-router-dom";
-
-
+import AdmissionSemester from "../pages/admin/academicManagement/AdmissionSemester";
 
 type TAdminSidebar = {
   key: string;
@@ -17,6 +16,16 @@ export const adminPaths = [
     name: "Dashboard",
     path: "dashboard",
     element: <AdminDashboard />,
+  },
+  {
+    name: "Academic Management",
+    children: [
+      {
+        name: "Admission Semester",
+        path: "admission-semester",
+        element: <AdmissionSemester />,
+      },
+    ],
   },
   {
     name: "User Management",
