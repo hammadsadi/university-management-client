@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://islamic-university-api.vercel.app/api/v1",
+  baseUrl: "http://localhost:5000/api/v1",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     // Get Token From Redux State
@@ -14,8 +14,14 @@ const baseQuery = fetchBaseQuery({
     return headers;
   },
 });
+
+// Custom Base Query
+const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
+  const result = await baseQuery(args, api, extraOptions);
+  console.log(result.error);
+};
 export const baseApi = createApi({
   reducerPath: "baseApi",
-  baseQuery: baseQuery,
+  baseQuery: baseQueryWithRefreshToken,
   endpoints: () => ({}),
 });

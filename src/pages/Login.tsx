@@ -11,8 +11,8 @@ const Login = () => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      userId: "2025010004",
-      password: "Sadi123456",
+      userId: "A-0001",
+      password: "123456",
     },
   });
   const dispatch = useAppDispatch();
