@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
+import { setUser } from "../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: `${import.meta.env.BASE_URL}`,
+  baseUrl: "http://localhost:5000/api/v1",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     // Get Token From Redux State
@@ -28,8 +29,11 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
       }
     );
     const tokenInfo = await res.json();
-    console.log("Sadi", tokenInfo);
+    const user = (api.getState() as RootState).auth.user;
+    api.dispatch(setUser({ user, token: tokenInfo.data.accessToken }));
   }
+
+  return result;
 };
 export const baseApi = createApi({
   reducerPath: "baseApi",
