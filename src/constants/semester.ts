@@ -5,10 +5,10 @@ export const nameOptions = [
   },
   {
     value: "02",
-    label: "Fall",
+    label: "Summer",
   },
   {
     value: "03",
-    label: "Summer",
+    label: "Fall",
   },
 ];

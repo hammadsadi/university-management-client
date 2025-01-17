@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import IUForm from "../../../components/form/IUForm";
 import { Button, Col, Flex } from "antd";
@@ -6,6 +7,9 @@ import { nameOptions } from "../../../constants/semester";
 import { monthsOptions } from "../../../constants/global";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { admissionSemesterSchema } from "../../../schemas/academic.management.schemas";
+import { useAddAdmissionSemesterMutation } from "../../../redux/features/admin/academic.management.api";
+import { toast } from "sonner";
+import { TErrorTypes } from "../../../types/types";
 
 // Years Options
 const currentYear = new Date().getFullYear();
@@ -15,7 +19,10 @@ const yearsOptions = [0, 1, 2, 3, 4].map((number) => ({
 }));
 
 const CreateAdmissionSemester = () => {
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const [addAdmissionSemester] = useAddAdmissionSemesterMutation();
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Creating...");
     const name = nameOptions[Number(data?.name) - 1]?.label;
     const semesterData = {
       name,
@@ -24,7 +31,17 @@ const CreateAdmissionSemester = () => {
       endMonth: data.endMonth,
       year: data.year,
     };
-    console.log(semesterData);
+    try {
+      const res = await addAdmissionSemester(semesterData);
+      console.log(res?.error);
+      if (res?.error) {
+        toast.error((res?.error as TErrorTypes).data.message, { id: toastId });
+      } else {
+        toast.success("Semester Created Successful", { id: toastId });
+      }
+    } catch (error) {
+      toast.error("Something Wron", { id: toastId });
+    }
   };
 
   return (
