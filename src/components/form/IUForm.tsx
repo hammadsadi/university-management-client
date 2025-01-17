@@ -10,9 +10,17 @@ import {
 type TFormSubmit = {
   onsubmit: SubmitHandler<FieldValues>;
   children: ReactNode;
+  resolver: any;
 };
-const IUForm = ({ onsubmit, children }: TFormSubmit) => {
-  const methods = useForm();
+type TFormConfig = {
+  resolver?: any;
+};
+const IUForm = ({ onsubmit, children, resolver }: TFormSubmit) => {
+  const formConfig: TFormConfig = {};
+  if (resolver) {
+    formConfig["resolver"] = resolver;
+  }
+  const methods = useForm(formConfig);
   return (
     <FormProvider {...methods}>
       <Form layout="vertical" onFinish={methods.handleSubmit(onsubmit)}>

@@ -13,7 +13,12 @@ const FormInput = ({ type, placeHolder, name, label }: TInputTypes) => {
         name={name}
         render={({ field }) => (
           <Form.Item label={label}>
-            <Input {...field} type={type} placeholder={placeHolder} />
+            <Input
+              {...field}
+              type={type}
+              placeholder={placeHolder}
+              size="large"
+            />
           </Form.Item>
         )}
       />
