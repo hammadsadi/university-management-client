@@ -10,6 +10,13 @@ import { toast } from "sonner";
 import IUForm from "../components/form/IUForm";
 import FormInput from "../components/form/FormInput";
 
+type TErrorTypes = {
+  data: {
+    success: string;
+    message: string;
+    errorResources?: any;
+  };
+};
 const Login = () => {
   const navigate = useNavigate();
 
@@ -29,7 +36,7 @@ const Login = () => {
       toast.success("Loging Success", { id: toastId });
       navigate(`/${user.role}/dashboard`);
     } catch (error) {
-      toast.error("Loging Faield", { id: toastId });
+      toast.error((error as TErrorTypes).data?.message, { id: toastId });
     }
   };
   return (

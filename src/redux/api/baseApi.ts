@@ -30,7 +30,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   DefinitionType
 > = async (args, api, extraOptions): Promise<any> => {
   let result = await baseQuery(args, api, extraOptions);
-
+console.log(result.error);
   if (result?.error?.status === 401) {
     const res = await fetch(
       `${import.meta.env.VITE_BASE_URL}/auth/refresh-token`,
