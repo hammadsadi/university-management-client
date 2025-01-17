@@ -1,23 +1,22 @@
-import { Button } from "antd";
-import { FieldValues, useForm } from "react-hook-form";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Button, Row } from "antd";
+import { FieldValues } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser, TUser } from "../redux/features/auth/authSlice";
 import { tokenDecode } from "../utils/tokenDecode";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import IUForm from "../components/form/IUForm";
+import FormInput from "../components/form/FormInput";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      userId: "A-0001",
-      password: "123456",
-    },
-  });
+
   const dispatch = useAppDispatch();
   const [login] = useLoginMutation();
   const onsubmit = async (data: FieldValues) => {
+    console.log(data);
     const toastId = toast.loading("Loging In");
     try {
       const userInfo = {
@@ -34,17 +33,25 @@ const Login = () => {
     }
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit(onsubmit)}>
-        <input type="text" placeholder="User Id" {...register("userId")} />
-        <input
-          type="text"
-          placeholder="User Password"
-          {...register("password")}
-        />
-        <Button htmlType="submit">Login</Button>
-      </form>
-    </div>
+    <Row justify="center" align="middle" style={{ height: "100vh" }}>
+      <div className="login-item">
+        <IUForm onsubmit={onsubmit}>
+          <FormInput
+            type="text"
+            placeHolder="Inter Your ID"
+            name="userId"
+            label="ID:"
+          />
+          <FormInput
+            type="text"
+            placeHolder="Inter Your Password"
+            name="password"
+            label="Password"
+          />
+          <Button htmlType="submit">Login</Button>
+        </IUForm>
+      </div>
+    </Row>
   );
 };
 

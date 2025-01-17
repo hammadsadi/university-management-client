@@ -11,3 +11,8 @@
 :where(.css-dev-only-do-not-override-7ny38l).ant-menu-dark .ant-menu-submenu-selected>.ant-menu-submenu-title, :where(.css-dev-only-do-not-override-7ny38l).ant-menu-dark>.ant-menu .ant-menu-submenu-selected>.ant-menu-submenu-title {
     color: #10ac84;
 }
+
+.login-item{
+    padding: 10px;
+    border-radius: 5px;
+}
