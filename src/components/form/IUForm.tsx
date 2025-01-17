@@ -1,3 +1,4 @@
+import { Form } from "antd";
 import { ReactNode } from "react";
 import {
   FieldValues,
@@ -14,7 +15,10 @@ const IUForm = ({ onsubmit, children }: TFormSubmit) => {
   const methods = useForm();
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onsubmit)}>{children}</form>;
+      <Form layout="vertical" onFinish={methods.handleSubmit(onsubmit)}>
+        {children}
+      </Form>
+      ;
     </FormProvider>
   );
 };

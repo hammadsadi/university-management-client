@@ -1,4 +1,4 @@
-import { Input } from "antd";
+import { Form, Input } from "antd";
 import { Controller } from "react-hook-form";
 type TInputTypes = {
   type: string;
@@ -8,12 +8,13 @@ type TInputTypes = {
 };
 const FormInput = ({ type, placeHolder, name, label }: TInputTypes) => {
   return (
-    <div style={{ marginBottom: "10px" }}>
-      {label ? label : null}
+    <div>
       <Controller
         name={name}
         render={({ field }) => (
-          <Input {...field} type={type} placeholder={placeHolder} />
+          <Form.Item label={label}>
+            <Input {...field} type={type} placeholder={placeHolder} />
+          </Form.Item>
         )}
       />
     </div>
