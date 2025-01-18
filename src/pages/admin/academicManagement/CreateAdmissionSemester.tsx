@@ -33,7 +33,6 @@ const CreateAdmissionSemester = () => {
     };
     try {
       const res = await addAdmissionSemester(semesterData);
-      console.log(res?.error);
       if (res?.error) {
         toast.error((res?.error as TErrorTypes).data.message, { id: toastId });
       } else {

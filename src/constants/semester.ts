@@ -1,7 +1,7 @@
 export const nameOptions = [
   {
     value: "01",
-    label: "Authum",
+    label: "Autumn",
   },
   {
     value: "02",
