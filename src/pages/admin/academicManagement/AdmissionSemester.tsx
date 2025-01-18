@@ -9,7 +9,8 @@ type TTableData = Pick<
 >;
 const AdmissionSemester = () => {
   const [params, setParams] = useState([]);
-  const { data: semesterData } = useGetAllAdmissionSemesterQuery(params);
+  const { data: semesterData, isFetching } =
+    useGetAllAdmissionSemesterQuery(params);
   const tableData = semesterData?.data?.map(
     ({ _id, name, year, startMonth, endMonth }) => ({
       key: _id,
@@ -94,7 +95,8 @@ const AdmissionSemester = () => {
     }
   };
   return (
-    <Table<TTableData>
+    <Table
+      loading={isFetching}
       columns={columns}
       dataSource={tableData}
       onChange={onChange}
