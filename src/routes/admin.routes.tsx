@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFacujlty from "../pages/admin/CreateFaculty";
-import CreateStudent from "../pages/admin/CreateStudent";
+import CreateStudent from "../pages/admin/userManagement/CreateStudent";
 import { NavLink } from "react-router-dom";
 import AdmissionSemester from "../pages/admin/academicManagement/AdmissionSemester";
 import CreateAdmissionSemester from "../pages/admin/academicManagement/CreateAdmissionSemester";
