@@ -8,6 +8,7 @@ import IUSelect from "../../../components/form/IUSelect";
 import IUDatePicker from "../../../components/form/IUDatePicker";
 import { useGetAllAdmissionSemesterQuery } from "../../../redux/features/admin/academic.management.api";
 import { useGetAllAcademicDepartmentQuery } from "../../../redux/features/admin/academicDepartment/academicDepartment.api";
+import { useAddStudentMutation } from "../../../redux/features/admin/userManagement/userManagement.api";
 
 const studentDummyData = {
   password: "student123",
@@ -56,6 +57,8 @@ const CreateStudent = () => {
     useGetAllAdmissionSemesterQuery(undefined);
   const { data: academicDData, isLoading: dIsloading } =
     useGetAllAcademicDepartmentQuery(undefined);
+  const [addStudent, { data, error }] = useAddStudentMutation();
+  console.log(data, error);
   // Admission Semester Name Options
   const admissionSemesterNameOptions = admissionSemesterData?.data?.map(
     (item) => ({
@@ -79,11 +82,13 @@ const CreateStudent = () => {
     label: item,
   }));
   const onsubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
-    // const formData = new FormData();
-
-    // formData.append("data", JSON.stringify(data));
-    // console.log(Object.fromEntries(formData));
+    const studentData = {
+      password: "student12345",
+      student: data,
+    };
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(studentData));
+    await addStudent(formData);
   };
   return (
     <Row>
