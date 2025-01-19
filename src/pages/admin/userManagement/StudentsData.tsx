@@ -1,74 +1,41 @@
-import { Table, TableColumnsType, TableProps } from "antd";
-import { useGetAllAdmissionSemesterQuery } from "../../../redux/features/admin/academic.management.api";
-import {
-  TAcademicSemester,
-  TQueryParams,
-} from "../../../types/academic.semester.types";
+import { Button, Space, Table, TableColumnsType, TableProps } from "antd";
+import { TQueryParams } from "../../../types/academic.semester.types";
 import { useState } from "react";
+import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManagement/userManagement.api";
+import { TStudent } from "../../../types";
 
-type TTableData = Pick<
-  TAcademicSemester,
-  "name" | "year" | "startMonth" | "endMonth"
->;
+type TTableData = Pick<TStudent, "name" | "id">;
 const StudentData = () => {
   const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
-  const { data: semesterData, isFetching } =
-    useGetAllAdmissionSemesterQuery(params);
-  const tableData = semesterData?.data?.map(
-    ({ _id, name, year, startMonth, endMonth }) => ({
-      key: _id,
-      name,
-      year,
-      startMonth,
-      endMonth,
-    })
-  );
+  const { data: sData, isFetching } = useGetAllStudentsQuery(params);
+  const tableData = sData?.data?.map(({ _id, id, fullName }) => ({
+    key: _id,
+    fullName,
+    id,
+  }));
   const columns: TableColumnsType<TTableData> = [
     {
       title: "Name",
-      dataIndex: "name",
+      dataIndex: "fullName",
       showSorterTooltip: { target: "full-header" },
-      filters: [
-        {
-          text: "Autumn",
-          value: "Autumn",
-        },
-        {
-          text: "Summer",
-          value: "Summer",
-        },
-        {
-          text: "Fall",
-          value: "Fall",
-        },
-      ],
+    },
+
+    {
+      title: "Role",
+      dataIndex: "id",
     },
     {
-      title: "Year",
-      dataIndex: "year",
-      defaultSortOrder: "descend",
-      filters: [
-        {
-          text: "2025",
-          value: "2025",
-        },
-        {
-          text: "2026",
-          value: "2026",
-        },
-        {
-          text: "2027",
-          value: "2027",
-        },
-      ],
-    },
-    {
-      title: "Start Month",
-      dataIndex: "startMonth",
-    },
-    {
-      title: "End Month",
-      dataIndex: "endMonth",
+      title: "Action",
+      render: () => {
+        return (
+          <Space>
+            <Button>Details</Button>
+            <Button>Update</Button>
+            <Button>Block</Button>
+          </Space>
+        );
+      },
+      width: "1%",
     },
   ];
 
