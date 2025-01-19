@@ -2,8 +2,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import FormInput from "../../../components/form/FormInput";
 import IUForm from "../../../components/form/IUForm";
 import { studentDataSchema } from "../../../schemas/student.manage.schema";
-import { Button, Col, Divider, Row } from "antd";
-import { FieldValues, SubmitHandler } from "react-hook-form";
+import { Button, Col, Divider, Form, Input, Row } from "antd";
+import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import IUSelect from "../../../components/form/IUSelect";
 import IUDatePicker from "../../../components/form/IUDatePicker";
 import { useGetAllAdmissionSemesterQuery } from "../../../redux/features/admin/academic.management.api";
@@ -88,6 +88,7 @@ const CreateStudent = () => {
     };
     const formData = new FormData();
     formData.append("data", JSON.stringify(studentData));
+    formData.append("file", data.image);
     await addStudent(formData);
   };
   return (
@@ -132,6 +133,22 @@ const CreateStudent = () => {
                 label="Blood Group"
                 name="bloogGroup"
                 options={bloodOptions}
+              />
+            </Col>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+              <Controller
+                name="image"
+                render={({ field: { onChange, value, ...field } }) => (
+                  <Form.Item label="Profile Picture">
+                    <Input
+                      value={value?.fileName}
+                      {...field}
+                      type="file"
+                      size="large"
+                      onChange={(e) => onChange(e?.target?.files?.[0])}
+                    />
+                  </Form.Item>
+                )}
               />
             </Col>
           </Row>

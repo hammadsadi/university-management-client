@@ -10,6 +10,7 @@ import CreateAcademicFaculty from "../pages/admin/academicManagement/CreateAcade
 import AcademicFaculty from "../pages/admin/academicManagement/AcademicFaculty";
 import CreateAcademicDepartment from "../pages/admin/academicManagement/CreateAcademicDepartment";
 import AcademicDepartment from "../pages/admin/academicManagement/AcademicDepartment";
+import StudentData from "../pages/admin/userManagement/StudentsData";
 
 type TAdminSidebar = {
   key: string;
@@ -74,6 +75,11 @@ export const adminPaths = [
         name: "Create Student",
         path: "create-student",
         element: <CreateStudent />,
+      },
+      {
+        name: "Students",
+        path: "students-data",
+        element: <StudentData />,
       },
     ],
   },
