@@ -1,14 +1,17 @@
 import { Table, TableColumnsType, TableProps } from "antd";
 import { useGetAllAdmissionSemesterQuery } from "../../../redux/features/admin/academic.management.api";
-import { TAcademicSemester } from "../../../types/academic.semester.types";
+import {
+  TAcademicSemester,
+  TQueryParams,
+} from "../../../types/academic.semester.types";
 import { useState } from "react";
 
 type TTableData = Pick<
   TAcademicSemester,
-  "_id" | "name" | "year" | "startMonth" | "endMonth"
+  "name" | "year" | "startMonth" | "endMonth"
 >;
 const AdmissionSemester = () => {
-  const [params, setParams] = useState([]);
+  const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
   const { data: semesterData, isFetching } =
     useGetAllAdmissionSemesterQuery(params);
   const tableData = semesterData?.data?.map(
@@ -76,7 +79,7 @@ const AdmissionSemester = () => {
     extra
   ) => {
     if (extra.action === "filter") {
-      const paramsData = [];
+      const paramsData: TQueryParams[] = [];
       // Name
       filters.name?.forEach((name) =>
         paramsData.push({
