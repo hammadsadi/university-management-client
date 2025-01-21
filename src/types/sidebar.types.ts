@@ -1,10 +1,12 @@
 import { ReactNode } from "react";
 
-export type TUserSidebar = {
-  key: string;
-  label: ReactNode;
-  children?: TUserSidebar[];
-};
+export type TUserSidebar =
+  | {
+      key: string;
+      label: ReactNode;
+      children?: TUserSidebar[];
+    }
+  | undefined;
 
 export type TUserRoutesItems = {
   name: string;

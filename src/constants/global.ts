@@ -17,3 +17,5 @@ export const monthsOptions = monthsList.map((month: string) => ({
   value: month,
   label: month,
 }));
+
+export const courseStatus = ["UPCOMING", "ONGOING", "ENDED"];

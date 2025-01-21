@@ -11,12 +11,22 @@ type TFormSubmit = {
   onsubmit: SubmitHandler<FieldValues>;
   children: ReactNode;
   resolver?: any;
+  defaultValues?: Record<string, any>;
 };
 type TFormConfig = {
+  defaultValues?: Record<string, any>;
   resolver?: any;
 };
-const IUForm = ({ onsubmit, children, resolver }: TFormSubmit) => {
+const IUForm = ({
+  onsubmit,
+  children,
+  resolver,
+  defaultValues,
+}: TFormSubmit) => {
   const formConfig: TFormConfig = {};
+  if (defaultValues) {
+    formConfig["defaultValues"] = defaultValues;
+  }
   if (resolver) {
     formConfig["resolver"] = resolver;
   }
