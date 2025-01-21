@@ -1,8 +1,23 @@
-import { Button, Table, TableColumnsType } from "antd";
+import { Button, Dropdown, Table, TableColumnsType, Tag } from "antd";
 import { useGetAllRegisterSemesterQuery } from "../../../redux/features/courseManagement/courseManagement";
 import moment from "moment";
 import { TSemester } from "../../../types";
 type TTableData = Pick<TSemester, "endDate" | "startDate" | "status">;
+
+const items = [
+  {
+    key: "UPCOMING",
+    label: "UPCOMING",
+  },
+  {
+    key: "ONGOING",
+    label: "ONGOING",
+  },
+  {
+    key: "ENDED",
+    label: "ENDED",
+  },
+];
 const RegisteredSemesters = () => {
   const { data: semesterData, isFetching } =
     useGetAllRegisterSemesterQuery(undefined);
@@ -15,6 +30,15 @@ const RegisteredSemesters = () => {
       endDate: moment(new Date(endDate)).format("MMMM"),
     })
   );
+
+  //  Status Update Functionality
+  const handleUpdateStatus = (data) => {
+    console.log(data);
+  };
+  const menuProps = {
+    items,
+    onClick: handleUpdateStatus,
+  };
   const columns: TableColumnsType<TTableData> = [
     {
       title: "Name",
@@ -25,6 +49,19 @@ const RegisteredSemesters = () => {
       title: "Status",
       dataIndex: "status",
       defaultSortOrder: "descend",
+      render: (item) => {
+        let color;
+        if (item === "UPCOMING") {
+          color = "blue";
+        }
+        if (item === "ONGOING") {
+          color = "green";
+        }
+        if (item === "ENDED") {
+          color = "red";
+        }
+        return <Tag color={color}>{item}</Tag>;
+      },
     },
     {
       title: "Start Date",
@@ -38,13 +75,14 @@ const RegisteredSemesters = () => {
       title: "Action",
       render: () => {
         return (
-          <div>
+          <Dropdown menu={menuProps}>
             <Button>Update</Button>
-          </div>
+          </Dropdown>
         );
       },
     },
   ];
+
   return (
     <Table
       loading={isFetching}
