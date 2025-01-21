@@ -34,10 +34,43 @@ const academicManagementApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+
+    // Get All Academic Faculties
+    getAcademicFaculties: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: any) => {
+            params.append(item.name, item.value);
+          });
+        }
+        return {
+          url: "/academic-faculties",
+          method: "GET",
+          params: params,
+        };
+      },
+      transformResponse: (response: TReduxResponse<any>) => {
+        return {
+          data: response?.data,
+          meta: response?.meta,
+        };
+      },
+    }),
+    // Create New Admission Semester
+    addAcademicFaculties: builder.mutation({
+      query: (data) => ({
+        url: "/academic-faculties/create-academic-faculty",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
 export const {
   useGetAllAdmissionSemesterQuery,
   useAddAdmissionSemesterMutation,
+  useGetAcademicFacultiesQuery,
+  useAddAcademicFacultiesMutation,
 } = academicManagementApi;

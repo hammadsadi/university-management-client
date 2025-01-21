@@ -1,17 +1,16 @@
 import { Button, Modal } from "antd";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
+type TIUModalProps = {
+  children: ReactNode;
+  item?: any;
+};
+const IUModal = ({ children, item }: TIUModalProps) => {
+  // console.log(item);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-const IUDeleteModal = ({
-  children,
-  showModal,
-  isModalOpen,
-  setIsModalOpen,
-}) => {
-  //   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  //   const showModal = () => {
-  //     setIsModalOpen(true);
-  //   };
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
 
   const handleOk = () => {
     setIsModalOpen(false);
@@ -30,6 +29,7 @@ const IUDeleteModal = ({
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        footer={[]}
       >
         {children}
       </Modal>
@@ -37,4 +37,4 @@ const IUDeleteModal = ({
   );
 };
 
-export default IUDeleteModal;
+export default IUModal;

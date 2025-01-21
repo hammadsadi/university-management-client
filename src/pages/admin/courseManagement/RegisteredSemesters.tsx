@@ -40,7 +40,7 @@ const RegisteredSemesters = () => {
   );
 
   //  Status Update Functionality
-  const handleUpdateStatus = async (data) => {
+  const handleUpdateStatus = async (data: any) => {
     const statusData = {
       id: semesterId,
       data: {
