@@ -3,7 +3,6 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import IUForm from "../../../components/form/IUForm";
 import { Button, Col, Flex } from "antd";
 import IUSelect from "../../../components/form/IUSelect";
-import { nameOptions } from "../../../constants/semester";
 import { courseStatus } from "../../../constants/global";
 import { useGetAllAdmissionSemesterQuery } from "../../../redux/features/admin/academic.management.api";
 import { toast } from "sonner";
@@ -51,10 +50,7 @@ const SemesterRegistration = () => {
   return (
     <Flex justify="center" align="center">
       <Col span={6}>
-        <IUForm
-          onsubmit={onSubmit}
-          // resolver={zodResolver(admissionSemesterSchema)}
-        >
+        <IUForm onsubmit={onSubmit}>
           <IUSelect
             label="Academic Semester"
             name="academicSemester"
