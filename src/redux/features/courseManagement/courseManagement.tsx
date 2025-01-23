@@ -68,6 +68,20 @@ const courseManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
+    //  Get All Courses
+    getCourseFaculties: builder.query({
+      query: (id) => ({
+        url: `/courses/${id}/get-faculties`,
+        method: "GET",
+      }),
+      transformResponse: (response: TReduxResponse<any>) => {
+        return {
+          data: response?.data,
+          meta: response?.meta,
+        };
+      },
+    }),
+
     // Create New Course
     addCourse: builder.mutation({
       query: (data) => ({
@@ -96,4 +110,5 @@ export const {
   useGetAllCoursesQuery,
   useAddCourseMutation,
   useAddFacultiesMutation,
+  useGetCourseFacultiesQuery,
 } = courseManagementApi;

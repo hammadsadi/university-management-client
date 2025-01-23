@@ -18,4 +18,13 @@ export const monthsOptions = monthsList.map((month: string) => ({
   label: month,
 }));
 
-export const courseStatus = ["UPCOMING", "ONGOING", "ENDED"];
+export const courseStatus: string[] = ["UPCOMING", "ONGOING", "ENDED"];
+export const DaysList: string[] = [
+  "Sat",
+  "Sun",
+  "Mon",
+  "Tue",
+  "Wed",
+  "Thu",
+  "Fri",
+];

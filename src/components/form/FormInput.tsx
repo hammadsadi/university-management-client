@@ -5,8 +5,15 @@ type TInputTypes = {
   placeHolder: string;
   name: string;
   label?: string;
+  disable?: boolean;
 };
-const FormInput = ({ type, placeHolder, name, label }: TInputTypes) => {
+const FormInput = ({
+  type,
+  placeHolder,
+  name,
+  label,
+  disable,
+}: TInputTypes) => {
   return (
     <div>
       <Controller
@@ -17,6 +24,7 @@ const FormInput = ({ type, placeHolder, name, label }: TInputTypes) => {
               {...field}
               type={type}
               placeholder={placeHolder}
+              disabled={disable}
               size="large"
             />
           </Form.Item>
