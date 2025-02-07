@@ -13,6 +13,7 @@ const courseManagementApi = baseApi.injectEndpoints({
             params.append(item.name, item.value);
           });
         }
+        console.log(params);
         return {
           url: "/semester-registrations",
           method: "GET",

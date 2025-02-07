@@ -9,7 +9,7 @@ export type TUserSidebar =
   | undefined;
 
 export type TUserRoutesItems = {
-  name: string;
+  name?: string;
   path?: string;
   element?: ReactNode;
   children?: TUserRoutesItems[];

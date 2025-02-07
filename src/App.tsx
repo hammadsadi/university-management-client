@@ -12,7 +12,7 @@ function App() {
           },
         }}
       >
-        <ProtectedRoutes>
+        <ProtectedRoutes role={undefined}>
           <MainLayout />
         </ProtectedRoutes>
       </ConfigProvider>

@@ -12,6 +12,7 @@ type TTableData = Pick<
 >;
 const AdmissionSemester = () => {
   const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
+  console.log("d", params);
   const { data: semesterData, isFetching } =
     useGetAllAdmissionSemesterQuery(params);
   const tableData = semesterData?.data?.map(
